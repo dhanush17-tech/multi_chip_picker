@@ -20,7 +20,7 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    MultiChipPicker multiChipPickerPlugin = MultiChipPicker(filterChips: [], onChanged: (data){});
+    MultiChipPicker multiChipPickerPlugin = MultiChipPicker(filterChips: const [], onChanged: (data){});
     MockMultiChipPickerPlatform fakePlatform = MockMultiChipPickerPlatform();
     MultiChipPickerPlatform.instance = fakePlatform;
 

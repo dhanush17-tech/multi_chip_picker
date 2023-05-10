@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'multi_chip_picker_platform_interface.dart';
 
-typedef void OnChanged(List<FilterChipData> data);
+typedef OnChanged = void Function(List<FilterChipData> data);
 
 class MultiChipPicker extends StatefulWidget {
   final List<FilterChipData>? filterChips; // List of filter chips
@@ -35,7 +35,7 @@ class MultiChipPicker extends StatefulWidget {
   final bool?
   isSelectedShadowColor; // Whether to use shadow color for selected filter chips
   final double? filterChipSpacing; //Spacing between each filter chip
-  MultiChipPicker({
+  const MultiChipPicker({
     Key? key,
     required this.filterChips,
     required this.onChanged,
@@ -67,6 +67,7 @@ class MultiChipPicker extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MultiChipPickerState createState() =>
       _MultiChipPickerState();
 
@@ -109,7 +110,7 @@ class _MultiChipPickerState extends State<MultiChipPicker> {
           chipData.isSelected, // Whether the filter chip is selected
           onSelected: (bool selected) {
             _onChipSelected(chipData, selected);
-           
+
           },
           key: widget.key,
           avatar: widget.avatar, // Avatar widget for the filter chip
@@ -118,8 +119,8 @@ class _MultiChipPickerState extends State<MultiChipPicker> {
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: chipData.isSelected == true
-                      ? Color.fromARGB(255, 0, 134, 243)
-                      : Color.fromARGB(255, 104, 103,
+                      ? const Color.fromARGB(255, 0, 134, 243)
+                      : const Color.fromARGB(255, 104, 103,
                       103)), // Style for the filter chip label
           labelPadding: widget.labelPadding ??
               const EdgeInsets.all(
@@ -129,13 +130,13 @@ class _MultiChipPickerState extends State<MultiChipPicker> {
           disabledColor:
           widget.disabledColor, // Color for disabled filter chips
           selectedColor: widget.selectedColor ??
-              Color.fromARGB(255, 0, 134, 243)
+              const Color.fromARGB(255, 0, 134, 243)
                   .withOpacity(0.1), // Color for selected filter chips
           tooltip: widget.tooltip, // Border side for filter chips
           side: widget.side ??
               (chipData.isSelected == true
-                  ? BorderSide(color: Colors.transparent, width: 0.0)
-                  : BorderSide(color: Colors.grey, width: 0.9)),
+                  ? const BorderSide(color: Colors.transparent, width: 0.0)
+                  :const BorderSide(color: Colors.grey, width: 0.9)),
           shape: widget.shape ??
               const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -144,13 +145,13 @@ class _MultiChipPickerState extends State<MultiChipPicker> {
           backgroundColor: widget.backgroundColor ??
               Colors.transparent, // Background color for filter chips
           padding: widget.padding ??
-              EdgeInsets.all(10.0), // Padding for filter chips
+              const EdgeInsets.all(10.0), // Padding for filter chips
           visualDensity:
           widget.visualDensity, // Visual density for filter chips
           surfaceTintColor: widget
               .surfaceTintColor, // Surface tint color for filter chips
           iconTheme: widget.iconTheme ??
-              IconThemeData(
+            const  IconThemeData(
                   color: Color.fromARGB(
                       255, 0, 134, 243)), // Icon theme for filter chips
           selectedShadowColor: widget
@@ -158,11 +159,11 @@ class _MultiChipPickerState extends State<MultiChipPicker> {
           showCheckmark: widget
               .showCheckmark, // Whether to show a checkmark for selected filter chips
           checkmarkColor: widget.checkmarkColor ??
-              Color.fromARGB(255, 0, 134,
+              const Color.fromARGB(255, 0, 134,
                   243), // Color for the checkmark on selected filter chips
 
           avatarBorder: widget.avatarBorder ??
-              CircleBorder(), // Border shape for filter chip avatars
+              const CircleBorder(), // Border shape for filter chip avatars
         );
       }).toList() ??
           [], // Convert filter chip data to filter chip widgets

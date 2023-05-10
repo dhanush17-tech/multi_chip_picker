@@ -3,10 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_chip_picker/multi_chip_picker.dart';
 
 void main() {
-  runApp(FilterChipPickerApp());
+  runApp(const FilterChipPickerApp());
 }
 
 class FilterChipPickerApp extends StatelessWidget {
+  const FilterChipPickerApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +16,7 @@ class FilterChipPickerApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyWidget());
+        home: const MyWidget());
   }
 }
 
@@ -34,11 +36,11 @@ class MyWidget extends StatelessWidget {
               Text(
                 "Choose your flavour!",
                 style: GoogleFonts.poppins(
-                    color: Color.fromARGB(255, 0, 134, 243),
+                    color: const Color.fromARGB(255, 0, 134, 243),
                     fontSize: 20,
                     fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               MultiChipPicker(
@@ -50,8 +52,7 @@ class MyWidget extends StatelessWidget {
                   FilterChipData("Strawberry Cheesecake", false),
                 ],
                 onChanged: (newValue) {
-                  print(newValue);
-                },
+                 },
               ),
             ],
           ),

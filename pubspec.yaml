@@ -1,7 +1,7 @@
 name: multi_chip_picker
-description: A new Flutter project.
+description: This plugin helps you create widgets that enables you to select multiple chips.
 version: 0.0.1
-homepage:
+homepage: https://github.com/dhanush17-tech/multi_chip_picker
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
