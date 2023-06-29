@@ -65,7 +65,8 @@ Feel free to adjust these parameters according to your specific requirements.
 Contributing
 
 Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
-License
+
+## License
 
 This project is licensed under the MIT License.
 

@@ -1,6 +1,6 @@
 name: multi_chip_picker
 description: This plugin helps you create widgets that enables you to select multiple chips.
-version: 0.0.1
+version: 0.0.3
 homepage: https://github.com/dhanush17-tech/multi_chip_picker
 
 environment:

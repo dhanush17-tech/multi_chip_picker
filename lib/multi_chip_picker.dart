@@ -27,14 +27,15 @@ class MultiChipPicker extends StatefulWidget {
   final IconThemeData? iconTheme; // Icon theme for filter chips
   final Color? selectedShadowColor; // Shadow color for selected filter chips
   final bool?
-  showCheckmark; // Whether to show a checkmark for selected filter chips
+      showCheckmark; // Whether to show a checkmark for selected filter chips
   final Color?
-  checkmarkColor; // Color for the checkmark on selected filter chips
+      checkmarkColor; // Color for the checkmark on selected filter chips
   final EdgeInsetsGeometry? padding; // Padding for filter chips
   final OutlinedBorder? shape; // Shape for filter chips
   final bool?
-  isSelectedShadowColor; // Whether to use shadow color for selected filter chips
+      isSelectedShadowColor; // Whether to use shadow color for selected filter chips
   final double? filterChipSpacing; //Spacing between each filter chip
+  final Color? selectedTextColor;
   const MultiChipPicker({
     Key? key,
     required this.filterChips,
@@ -56,6 +57,7 @@ class MultiChipPicker extends StatefulWidget {
     this.padding,
     this.pressElevation,
     this.selectedColor,
+    this.selectedTextColor,
     this.selectedShadowColor,
     this.shape,
     this.showCheckmark,
@@ -68,12 +70,12 @@ class MultiChipPicker extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _MultiChipPickerState createState() =>
-      _MultiChipPickerState();
+  _MultiChipPickerState createState() => _MultiChipPickerState();
 
   Future<String?> getPlatformVersion() {
     return MultiChipPickerPlatform.instance.getPlatformVersion();
-  }}
+  }
+}
 
 class _MultiChipPickerState extends State<MultiChipPicker> {
   List<FilterChipData> filteredChipData = []; // Selected filter chips
@@ -104,68 +106,67 @@ class _MultiChipPickerState extends State<MultiChipPicker> {
       alignment: WrapAlignment.center,
       spacing: widget.filterChipSpacing ?? 8.0,
       children: widget.filterChips?.map((chipData) {
-        return FilterChip(
-          label: Text(chipData.label), // Label for the filter chip
-          selected:
-          chipData.isSelected, // Whether the filter chip is selected
-          onSelected: (bool selected) {
-            _onChipSelected(chipData, selected);
+            return FilterChip(
+              label: Text(chipData.label), // Label for the filter chip
+              selected:
+                  chipData.isSelected, // Whether the filter chip is selected
+              onSelected: (bool selected) {
+                _onChipSelected(chipData, selected);
+              },
+              key: widget.key,
+              avatar: widget.avatar, // Avatar widget for the filter chip
+              labelStyle: widget.labelStyle ??
+                  TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: chipData.isSelected == true
+                          ? widget.selectedTextColor
+                          : const Color.fromARGB(255, 104, 103,
+                              103)), // Style for the filter chip label
+              labelPadding: widget.labelPadding ??
+                  const EdgeInsets.all(
+                      3.0), // Padding for the filter chip label
+              pressElevation: widget
+                  .pressElevation, // Elevation when filter chip is pressed
+              disabledColor:
+                  widget.disabledColor, // Color for disabled filter chips
+              selectedColor: widget.selectedColor ??
+                  const Color.fromARGB(255, 0, 134, 243)
+                      .withOpacity(0.1), // Color for selected filter chips
+              tooltip: widget.tooltip, // Border side for filter chips
+              side: widget.side ??
+                  (chipData.isSelected == true
+                      ? const BorderSide(color: Colors.transparent, width: 0.0)
+                      : const BorderSide(color: Colors.grey, width: 0.9)),
+              shape: widget.shape ??
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ), // Shape for filter chips
+              focusNode: widget.focusNode, // Focus node for filter chips
+              backgroundColor: widget.backgroundColor ??
+                  Colors.transparent, // Background color for filter chips
+              padding: widget.padding ??
+                  const EdgeInsets.all(10.0), // Padding for filter chips
+              visualDensity:
+                  widget.visualDensity, // Visual density for filter chips
+              surfaceTintColor: widget
+                  .surfaceTintColor, // Surface tint color for filter chips
+              iconTheme: widget.iconTheme ??
+                  const IconThemeData(
+                      color: Color.fromARGB(
+                          255, 0, 134, 243)), // Icon theme for filter chips
+              selectedShadowColor: widget
+                  .selectedShadowColor, // Shadow color for selected filter chips
+              showCheckmark: widget
+                  .showCheckmark, // Whether to show a checkmark for selected filter chips
+              checkmarkColor: widget.checkmarkColor ??
+                  const Color.fromARGB(255, 0, 134,
+                      243), // Color for the checkmark on selected filter chips
 
-          },
-          key: widget.key,
-          avatar: widget.avatar, // Avatar widget for the filter chip
-          labelStyle: widget.labelStyle ??
-              TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: chipData.isSelected == true
-                      ? const Color.fromARGB(255, 0, 134, 243)
-                      : const Color.fromARGB(255, 104, 103,
-                      103)), // Style for the filter chip label
-          labelPadding: widget.labelPadding ??
-              const EdgeInsets.all(
-                  3.0), // Padding for the filter chip label
-          pressElevation: widget
-              .pressElevation, // Elevation when filter chip is pressed
-          disabledColor:
-          widget.disabledColor, // Color for disabled filter chips
-          selectedColor: widget.selectedColor ??
-              const Color.fromARGB(255, 0, 134, 243)
-                  .withOpacity(0.1), // Color for selected filter chips
-          tooltip: widget.tooltip, // Border side for filter chips
-          side: widget.side ??
-              (chipData.isSelected == true
-                  ? const BorderSide(color: Colors.transparent, width: 0.0)
-                  :const BorderSide(color: Colors.grey, width: 0.9)),
-          shape: widget.shape ??
-              const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              ), // Shape for filter chips
-          focusNode: widget.focusNode, // Focus node for filter chips
-          backgroundColor: widget.backgroundColor ??
-              Colors.transparent, // Background color for filter chips
-          padding: widget.padding ??
-              const EdgeInsets.all(10.0), // Padding for filter chips
-          visualDensity:
-          widget.visualDensity, // Visual density for filter chips
-          surfaceTintColor: widget
-              .surfaceTintColor, // Surface tint color for filter chips
-          iconTheme: widget.iconTheme ??
-            const  IconThemeData(
-                  color: Color.fromARGB(
-                      255, 0, 134, 243)), // Icon theme for filter chips
-          selectedShadowColor: widget
-              .selectedShadowColor, // Shadow color for selected filter chips
-          showCheckmark: widget
-              .showCheckmark, // Whether to show a checkmark for selected filter chips
-          checkmarkColor: widget.checkmarkColor ??
-              const Color.fromARGB(255, 0, 134,
-                  243), // Color for the checkmark on selected filter chips
-
-          avatarBorder: widget.avatarBorder ??
-              const CircleBorder(), // Border shape for filter chip avatars
-        );
-      }).toList() ??
+              avatarBorder: widget.avatarBorder ??
+                  const CircleBorder(), // Border shape for filter chip avatars
+            );
+          }).toList() ??
           [], // Convert filter chip data to filter chip widgets
     );
   }
